@@ -2,8 +2,7 @@ package com.ahad.banking.facade;
 
 import com.ahad.banking.dto.CustomerDto;
 import com.ahad.banking.dto.RealCustomerDto;
-import com.ahad.banking.entity.Customer;
-import com.ahad.banking.entity.RealCustomer;
+
 
 import java.util.List;
 

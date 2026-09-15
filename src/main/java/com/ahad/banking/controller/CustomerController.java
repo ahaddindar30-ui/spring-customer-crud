@@ -5,23 +5,24 @@ import com.ahad.banking.dto.CustomerDto;
 
 import com.ahad.banking.dto.RealCustomerDto;
 import com.ahad.banking.facade.CustomerFacade;
-import com.ahad.banking.facade.impl.CustomerFacadeImpl;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerFacade customerFacade;
 
-  public CustomerController(CustomerFacadeImpl customerFacade){
+  public CustomerController(CustomerFacade customerFacade){
       this.customerFacade=customerFacade;
   }
 
     @PostMapping("/add")
-    public void addCustomer(@RequestBody CustomerDto customer) {
+    public void addCustomer(@Valid @RequestBody CustomerDto customer) {
         customerFacade.addCustomer(customer);
     }
 
@@ -36,7 +37,7 @@ public class CustomerController {
     }
 
     @PutMapping("/update/{id}")
-    public CustomerDto updateCustomer(@RequestBody CustomerDto customer, @PathVariable Integer id) {
+    public CustomerDto updateCustomer(@Valid @RequestBody CustomerDto customer, @PathVariable Integer id) {
         return customerFacade.updateCustomer(id, customer);
     }
 
@@ -51,12 +52,12 @@ public class CustomerController {
     }
 
     @GetMapping("/all/name")
-    public List<CustomerDto> getCustomerByName(@RequestBody String name) {
+    public List<CustomerDto> getCustomerByName(@RequestParam String name) {
         return customerFacade.getCustomerByName(name);
     }
 
     @GetMapping("/all/family")
-    public List<RealCustomerDto> getCustomerByFamily(@RequestBody String family) {
+    public List<RealCustomerDto> getCustomerByFamily(@RequestParam String family) {
         return customerFacade.getCustomerByFamily(family);
     }
 }

@@ -21,17 +21,14 @@ public abstract class CustomerDto {
     @Size(min = 3, max = 10, message = "The name must be between 3 and 10 characters.")
     private String name;
     @NotBlank(message = "Contact number is required.")
-    @Pattern(regexp = "^0\\\\d{10}$|^00\\\\d{12}$|\\\\+\\\\d{12}$",
-            message = "The phone number must start with 09 and 00 and be 11 digits long.")
+    @Pattern(regexp = "^(09\\d{9}|00\\d{12}|\\+\\d{12})$", message = "Invalid phone number format.")
     private String phone;
     private final CustomerType type;
-    @NotBlank(message = "email can not be empty.")
-    @Email(message = "The email format entered is not correct.")
-    @Pattern(regexp ="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",message = "Invalid email format")
+    @NotBlank(message = "Email can not be empty.")
+    @Email(message = "Invalid email format.")
     private String email;
     @NotBlank(message = "address can not be empty.")
     private String address;
-
 
 
 }

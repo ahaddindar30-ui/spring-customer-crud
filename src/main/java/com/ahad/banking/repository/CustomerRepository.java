@@ -11,8 +11,6 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     List <Customer> findByName(String name);
     List <RealCustomer> findByFamily(String family);
 
-    Customer getCustomerById(Integer id);
-
     List<Customer> getCustomerByDeleted(boolean delete);
 
     boolean existsByEmail(String email);

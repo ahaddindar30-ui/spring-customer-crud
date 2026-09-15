@@ -2,7 +2,6 @@ package com.ahad.banking.facade.impl;
 
 import com.ahad.banking.dto.CustomerDto;
 import com.ahad.banking.dto.RealCustomerDto;
-import com.ahad.banking.entity.RealCustomer;
 import com.ahad.banking.facade.CustomerFacade;
 import com.ahad.banking.mapper.CustomerMapper;
 import com.ahad.banking.service.CustomerService;
@@ -40,7 +39,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
     @Override
     public void deleteCustomer(Integer id) {
-        customerService.getDeletedCustomers();
+        customerService.deleteCustomer(id);
     }
 
     @Override

@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class LegalCustomerDto extends CustomerDto{
     @NotBlank(message = "Contact fax number is required.")
-    @Pattern(regexp ="^0\\\\d{10}$|^00\\\\d{12}$|\\\\+\\\\d{12}$" ,message = "Invalid format fax number.")
+    @Pattern(regexp = "^(09\\d{9}|00\\d{12}|\\+\\d{12})$", message = "Invalid fax number format.")
     private String faxNumber;
     @NotBlank(message = "Contact company registration is required.")
     @Pattern(regexp ="^\\d{4,20}$",message = "The company registration number must be between 4 and 20.")
