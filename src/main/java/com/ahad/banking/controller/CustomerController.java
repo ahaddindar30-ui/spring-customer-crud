@@ -1,7 +1,11 @@
 package com.ahad.banking.controller;
 
-import com.ahad.banking.entity.Customer;
-import com.ahad.banking.service.TestService;
+import com.ahad.banking.dto.CustomerDto;
+
+
+import com.ahad.banking.dto.RealCustomerDto;
+import com.ahad.banking.facade.CustomerFacade;
+import com.ahad.banking.facade.impl.CustomerFacadeImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,37 +14,49 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
-    private final TestService testService;
+    private final CustomerFacade customerFacade;
 
-    public CustomerController(TestService testService) {
-        this.testService = testService;
-    }
+  public CustomerController(CustomerFacadeImpl customerFacade){
+      this.customerFacade=customerFacade;
+  }
 
     @PostMapping("/add")
-    public Customer addCustomer(@RequestBody Customer customer){
-       return testService.addCustomer(customer);
+    public void addCustomer(@RequestBody CustomerDto customer) {
+        customerFacade.addCustomer(customer);
     }
+
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Integer id){
-        return testService.getCustomerById(id);
+    public CustomerDto getCustomerById(@PathVariable Integer id) {
+        return customerFacade.getCustomerById(id);
     }
 
     @GetMapping("/all")
-    public List<Customer> getAllCustomers(){
-        return testService.getActiveCustomers();
+    public List<CustomerDto> getAllCustomers() {
+        return customerFacade.getActiveCustomers();
     }
 
     @PutMapping("/update/{id}")
-    public Customer updateCustomer(@RequestBody Customer customer, @PathVariable Integer id){
-        return testService.updateCustomer(id, customer);
+    public CustomerDto updateCustomer(@RequestBody CustomerDto customer, @PathVariable Integer id) {
+        return customerFacade.updateCustomer(id, customer);
     }
 
     @DeleteMapping("/deleted/{id}")
-    public void deleteCustomer(@PathVariable Integer id){
-        testService.deleteCustomer(id);
+    public void deleteCustomer(@PathVariable Integer id) {
+        customerFacade.deleteCustomer(id);
     }
 
+    @GetMapping("/all/deleted")
+    public List<CustomerDto> getDeletedCustomers() {
+        return customerFacade.getDeletedCustomers();
+    }
 
+    @GetMapping("/all/name")
+    public List<CustomerDto> getCustomerByName(@RequestBody String name) {
+        return customerFacade.getCustomerByName(name);
+    }
 
-
+    @GetMapping("/all/family")
+    public List<RealCustomerDto> getCustomerByFamily(@RequestBody String family) {
+        return customerFacade.getCustomerByFamily(family);
+    }
 }

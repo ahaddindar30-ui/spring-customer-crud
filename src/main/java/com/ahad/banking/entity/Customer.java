@@ -1,22 +1,55 @@
 package com.ahad.banking.entity;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-@JsonPropertyOrder({"id","name","email"})
+import lombok.ToString;
+
+import java.io.Serializable;
+
+@JsonPropertyOrder({"id","deleted","name" , "phone" , "email" , "address" , "type"})
 @Entity
+@Table(name = "customer")
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = LegalCustomer.class, name = "LEGAL"),
+        @JsonSubTypes.Type(value = RealCustomer.class, name = "REAL")
+
+})
 @Getter
 @Setter
-public class Customer {
+@ToString
+public abstract class Customer implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_sequence")
+    @SequenceGenerator(name = "customer_sequence", sequenceName = "customer_seq", allocationSize = 1)
     private Integer id;
 
     private String name;
-
+    private String phone;
+    @Enumerated(EnumType.STRING)
+    private CustomerType type;
     private String email;
+    private String address;
+    private boolean deleted;
+
+    public Customer(String name, String phone, String email, String address, CustomerType type) {
+        this.name = name;
+        this.phone = phone;
+        this.type = type;
+        this.email = email;
+        this.address = address;
+        this.deleted = false;
+    }
+
+    public Customer(CustomerType type) {
+        this.deleted = false;
+        this.type = type;
+    }
+
+    protected Customer() {
+
+    }
 }
