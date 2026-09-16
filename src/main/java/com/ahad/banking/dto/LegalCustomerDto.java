@@ -17,7 +17,7 @@ public class LegalCustomerDto extends CustomerDto {
     @NotBlank(message = "Contact company registration is required.")
     @Pattern(regexp = "^\\d{4,20}$", message = "The company registration number must be between 4 and 20.")
     private String companyRegistration;
-    @NotBlank(message = "Customer companyName is empty or null.")
+    @NotBlank(message = "The company name must not be empty or null.")
     private String nameCompony;
 
     public LegalCustomerDto(Integer id, String name, Integer age, String phone, String email, String address) {

@@ -36,10 +36,7 @@ public abstract class CustomerDto {
     private Integer age;
 
     @NotBlank(message = "Contact number is required.")
-    @Pattern(
-            regexp = "^(09\\d{9}|00\\d{12}|\\+\\d{12})$",
-            message = "Invalid phone number format."
-    )
+    @Pattern(regexp = "^(09\\d{9}|00\\d{12}|\\+\\d{12})$",message = "Invalid phone number format.")
     private String phone;
 
     @NotNull(message = "Customer type is required.")
