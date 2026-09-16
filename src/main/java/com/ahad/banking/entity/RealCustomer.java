@@ -8,7 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-@JsonPropertyOrder({"family","nationalCode"})
+
+@JsonPropertyOrder({"family", "nationalCode"})
 @Entity
 @Table(name = "real_customer")
 
@@ -18,8 +19,9 @@ import java.io.Serializable;
 public class RealCustomer extends Customer implements Serializable {
     private String family;
     private String nationalCode;
-    public RealCustomer(String name, String number, String email,String address) {
-        super(name, number, email,address ,  CustomerType.REAL);
+
+    public RealCustomer(String name, Integer age, String number, String email, String address) {
+        super(name, age, number, email, address, CustomerType.REAL);
     }
 
     public RealCustomer() {

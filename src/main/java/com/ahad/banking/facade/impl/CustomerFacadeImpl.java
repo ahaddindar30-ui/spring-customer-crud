@@ -5,17 +5,16 @@ import com.ahad.banking.dto.RealCustomerDto;
 import com.ahad.banking.facade.CustomerFacade;
 import com.ahad.banking.mapper.CustomerMapper;
 import com.ahad.banking.service.CustomerService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
+@AllArgsConstructor
 public class CustomerFacadeImpl implements CustomerFacade {
     private final CustomerService customerService;
     private final CustomerMapper mapper;
-    public CustomerFacadeImpl(CustomerService customerService, CustomerMapper mapper) {
-        this.customerService = customerService;
-        this.mapper = mapper;
-    }
+
     @Override
     public void addCustomer(CustomerDto customerDto) {
          customerService.addCustomer(mapper.mapToCustomer(customerDto));

@@ -19,11 +19,11 @@ public class RealCustomerDto extends CustomerDto{
     @Pattern(regexp = "^\\d{10}$",message ="The national code must be 10 digits." )
     private String nationalCode;
 
-    public RealCustomerDto(Integer id, String name, String phone, String email, String address) {
-        super(id, name, phone, CustomerType.REAL, email, address);
+    public RealCustomerDto(Integer id, String name,Integer age, String phone, String email, String address) {
+        super(id, name,age, phone, CustomerType.REAL, email, address);
     }
 
     public RealCustomerDto() {
-            super(CustomerType.REAL);
+            super();
     }
 }

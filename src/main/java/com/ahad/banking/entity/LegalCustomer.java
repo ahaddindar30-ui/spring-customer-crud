@@ -19,12 +19,12 @@ public class LegalCustomer extends Customer implements Serializable {
     private String faxNumber;
     private String companyRegistration;
     private String nameCompony;
-    public LegalCustomer(String name, String number, String email,String address) {
-        super(name, number, email,address ,  CustomerType.REAL);
+    public LegalCustomer(String name, Integer age, String number, String email,String address) {
+        super(name,age ,number, email,address ,  CustomerType.LEGAL);
     }
 
     public LegalCustomer() {
-        super(CustomerType.REAL);
+        super(CustomerType.LEGAL);
     }
 
 }

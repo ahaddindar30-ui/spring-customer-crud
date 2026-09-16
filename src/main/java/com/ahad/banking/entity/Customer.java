@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-@JsonPropertyOrder({"id","deleted","name" , "phone" , "email" , "address" , "type"})
+@JsonPropertyOrder({"id", "deleted", "name", "phone", "email", "address", "type"})
 @Entity
 @Table(name = "customer")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -27,6 +27,8 @@ public abstract class Customer implements Serializable {
     @SequenceGenerator(name = "customer_sequence", sequenceName = "customer_seq", allocationSize = 1)
     private Integer id;
 
+    private Integer age;
+
     private String name;
     private String phone;
     @Enumerated(EnumType.STRING)
@@ -35,8 +37,12 @@ public abstract class Customer implements Serializable {
     private String address;
     private boolean deleted;
 
-    public Customer(String name, String phone, String email, String address, CustomerType type) {
+    @Version
+    private long version;
+
+    public Customer(String name, Integer age, String phone, String email, String address, CustomerType type) {
         this.name = name;
+        this.age = age;
         this.phone = phone;
         this.type = type;
         this.email = email;
@@ -52,4 +58,7 @@ public abstract class Customer implements Serializable {
     protected Customer() {
 
     }
+
+
+
 }
