@@ -65,7 +65,6 @@ class CustomerServiceImplTest {
         return dto;
     }
 
-    // -------------------- ADD CUSTOMER --------------------
 
     @Test
     void testAddCustomer_AgeNotAllowed() {
@@ -91,7 +90,6 @@ class CustomerServiceImplTest {
         Mockito.verify(repository).save(any());
     }
 
-    // -------------------- GET CUSTOMER BY ID --------------------
 
     @Test
     void testGetCustomerById_NotFound() {
@@ -109,7 +107,6 @@ class CustomerServiceImplTest {
         assertEquals("Ahad", result.getName());
     }
 
-    // -------------------- GET ACTIVE CUSTOMERS --------------------
 
     @Test
     void testGetActiveCustomers_NotFound() {
@@ -127,7 +124,6 @@ class CustomerServiceImplTest {
         assertEquals(1, result.size());
     }
 
-    // -------------------- UPDATE CUSTOMER --------------------
 
     @Test
     void testUpdateCustomer_NotFound() {
@@ -162,7 +158,6 @@ class CustomerServiceImplTest {
     }
 
 
-    // -------------------- DELETE CUSTOMER --------------------
 
     @Test
     void testDeleteCustomer_NotFound() {
@@ -180,7 +175,6 @@ class CustomerServiceImplTest {
         Mockito.verify(repository).save(any());
     }
 
-    // -------------------- GET DELETED CUSTOMERS --------------------
 
     @Test
     void testGetDeletedCustomers_NotFound() {
@@ -198,7 +192,6 @@ class CustomerServiceImplTest {
         assertEquals(1, result.size());
     }
 
-    // -------------------- GET CUSTOMER BY NAME --------------------
 
     @Test
     void testGetCustomerByName() {
@@ -209,7 +202,6 @@ class CustomerServiceImplTest {
         assertEquals(1, result.size());
     }
 
-    // -------------------- GET CUSTOMER BY FAMILY --------------------
 
     @Test
     void testGetCustomerByFamily() {

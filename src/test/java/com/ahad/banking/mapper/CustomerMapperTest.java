@@ -68,8 +68,6 @@ class CustomerMapperTest {
         return dto;
     }
 
-    // -------------------- ENTITY → DTO --------------------
-
     @Test
     void testMapToRealCustomerDto() {
         RealCustomerDto dto = mapper.mapToRealCustomerDto(sampleReal());
@@ -110,7 +108,6 @@ class CustomerMapperTest {
                 () -> mapper.mapToCustomerDto(unknown));
     }
 
-    // -------------------- DTO → ENTITY --------------------
 
     @Test
     void testMapToCustomer_CreateReal() {
@@ -131,11 +128,11 @@ class CustomerMapperTest {
     @Test
     void testMapToCustomer_UpdateReal() {
         RealCustomer entity = sampleReal();
-        entity.setId(999); // باید تغییر نکند
+        entity.setId(999);
 
         mapper.mapToRealCustomer(sampleRealDto(), entity);
 
-        assertEquals(999, entity.getId()); // id تغییر نمی‌کند
+        assertEquals(999, entity.getId());
         assertEquals("Ahad", entity.getName());
         assertEquals("Dev", entity.getFamily());
     }
@@ -147,7 +144,7 @@ class CustomerMapperTest {
 
         mapper.mapToLegalCustomer(sampleLegalDto(), entity);
 
-        assertEquals(888, entity.getId()); // id تغییر نمی‌کند
+        assertEquals(888, entity.getId());
         assertEquals("CompanyX", entity.getName());
         assertEquals("998877", entity.getCompanyRegistration());
     }
@@ -158,7 +155,6 @@ class CustomerMapperTest {
                 () -> mapper.mapToCustomer(sampleRealDto(), sampleLegal()));
     }
 
-    // -------------------- LIST MAPPING --------------------
 
     @Test
     void testMapCustomerDtoList() {

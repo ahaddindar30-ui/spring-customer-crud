@@ -3,7 +3,6 @@ package com.ahad.banking.controller;
 import com.ahad.banking.dto.CustomerDto;
 
 
-import com.ahad.banking.dto.LegalCustomerDto;
 import com.ahad.banking.dto.RealCustomerDto;
 import com.ahad.banking.facade.CustomerFacade;
 import jakarta.validation.Valid;
