@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CustomerFacade {
 
-    void addCustomer(CustomerDto customerDto);
+    CustomerDto addCustomer(CustomerDto customerDto);
 
     CustomerDto getCustomerById(Integer id);
 

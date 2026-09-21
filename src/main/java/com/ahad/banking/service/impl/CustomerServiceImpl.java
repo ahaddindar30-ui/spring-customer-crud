@@ -28,28 +28,29 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper mapper;
 
 
-
-
     @Override
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         if (customer.getAge() < 18) {
             throw new AgeNotAllowedException("Customer age is less than 18");
         }
         if (repository.existsByEmail(customer.getEmail())) {
             throw new CustomerDuplicateException("Customer already exists");
         }
-         repository.save(customer);
+        return repository.save(customer);
     }
+
     @Override
     public Customer getCustomerById(Integer id) {
         return repository.findById(id)
                 .orElseThrow(() ->
                         new CustomerNotFindException("Customer not found with id: " + id));
     }
+
     @Override
     public List<Customer> getActiveCustomers() {
-       return repository.findCustomerByDeleted(false);
+        return repository.findCustomerByDeleted(false);
     }
+
     @Override
     public Customer updateCustomer(Integer id, CustomerDto newData) {
 
@@ -80,8 +81,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getDeletedCustomers() {
         return repository.findCustomerByDeleted(true);
     }
+
     @Override
-    public List<Customer> getCustomerByName(String name){
+    public List<Customer> getCustomerByName(String name) {
         return repository.findByName(name);
     }
 

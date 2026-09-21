@@ -2,6 +2,7 @@ package com.ahad.banking.facade.impl;
 
 import com.ahad.banking.dto.CustomerDto;
 import com.ahad.banking.dto.RealCustomerDto;
+import com.ahad.banking.entity.Customer;
 import com.ahad.banking.facade.CustomerFacade;
 import com.ahad.banking.mapper.CustomerMapper;
 import com.ahad.banking.service.CustomerService;
@@ -16,8 +17,11 @@ public class CustomerFacadeImpl implements CustomerFacade {
     private final CustomerMapper mapper;
 
     @Override
-    public void addCustomer(CustomerDto customerDto) {
-         customerService.addCustomer(mapper.mapToCustomer(customerDto));
+    public CustomerDto addCustomer(CustomerDto customerDto) {
+        Customer saved =customerService.addCustomer(
+                mapper.mapToCustomer(customerDto)
+        );
+        return mapper.mapToCustomerDto(saved);
     }
 
     @Override

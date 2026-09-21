@@ -24,9 +24,9 @@ public class CustomerController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addCustomer(@Valid @RequestBody CustomerDto customer) {
-            customerFacade.addCustomer(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<CustomerDto> addCustomer(@Valid @RequestBody CustomerDto customer) {
+        CustomerDto saved = customerFacade.addCustomer(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 
 
     }
