@@ -20,8 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -109,15 +108,18 @@ class CustomerServiceImplTest {
 
 
     @Test
-    void testGetActiveCustomers_NotFound() {
-        Mockito.when(repository.getCustomerByDeleted(false)).thenReturn(List.of());
+    void testGetActiveCustomers_EmptyList() {
+        Mockito.when(repository.findCustomerByDeleted(false)).thenReturn(List.of());
 
-        assertThrows(CustomerNotFindException.class, () -> service.getActiveCustomers());
+        List<Customer> result = service.getActiveCustomers();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void testGetActiveCustomers_Success() {
-        Mockito.when(repository.getCustomerByDeleted(false)).thenReturn(List.of(sampleEntity()));
+        Mockito.when(repository.findCustomerByDeleted(false)).thenReturn(List.of(sampleEntity()));
 
         List<Customer> result = service.getActiveCustomers();
 
@@ -178,14 +180,17 @@ class CustomerServiceImplTest {
 
     @Test
     void testGetDeletedCustomers_NotFound() {
-        Mockito.when(repository.getCustomerByDeleted(true)).thenReturn(List.of());
+        Mockito.when(repository.findCustomerByDeleted(true)).thenReturn(List.of());
 
-        assertThrows(CustomerNotFindException.class, () -> service.getDeletedCustomers());
+        List<Customer> result = service.getDeletedCustomers();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void testGetDeletedCustomers_Success() {
-        Mockito.when(repository.getCustomerByDeleted(true)).thenReturn(List.of(sampleEntity()));
+        Mockito.when(repository.findCustomerByDeleted(true)).thenReturn(List.of(sampleEntity()));
 
         List<Customer> result = service.getDeletedCustomers();
 

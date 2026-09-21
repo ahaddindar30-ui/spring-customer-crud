@@ -52,7 +52,7 @@ class CustomerControllerTest {
         mockMvc.perform(post("/api/customers/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(dto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         Mockito.verify(facade).addCustomer(any());
     }
@@ -90,7 +90,7 @@ class CustomerControllerTest {
     @Test
     void testDeleteCustomer() throws Exception {
         mockMvc.perform(delete("/api/customers/deleted/1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         Mockito.verify(facade).deleteCustomer(1);
     }

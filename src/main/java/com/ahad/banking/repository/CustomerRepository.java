@@ -9,7 +9,7 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     List <Customer> findByName(String name);
 
-    List<Customer> getCustomerByDeleted(boolean delete);
+    List<Customer> findCustomerByDeleted(boolean delete);
 
     boolean existsByEmail(String email);
 }

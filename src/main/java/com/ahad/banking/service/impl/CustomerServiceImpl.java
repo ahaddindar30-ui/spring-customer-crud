@@ -30,29 +30,27 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 
+    @Override
     public void addCustomer(Customer customer) {
-        if (customer.getAge() < 18){
+        if (customer.getAge() < 18) {
             throw new AgeNotAllowedException("Customer age is less than 18");
-        }if (repository.existsByEmail(customer.getEmail())) {
+        }
+        if (repository.existsByEmail(customer.getEmail())) {
             throw new CustomerDuplicateException("Customer already exists");
         }
          repository.save(customer);
     }
-
+    @Override
     public Customer getCustomerById(Integer id) {
         return repository.findById(id)
                 .orElseThrow(() ->
-                        new CustomerNotFindException("Customer not found"));
+                        new CustomerNotFindException("Customer not found with id: " + id));
     }
-
+    @Override
     public List<Customer> getActiveCustomers() {
-        List<Customer> customerList = repository.getCustomerByDeleted(false);
-        if (customerList.isEmpty()) {
-            throw new CustomerNotFindException("Customer not found");
-        } else {
-            return customerList;
-        }
+       return repository.findCustomerByDeleted(false);
     }
+    @Override
     public Customer updateCustomer(Integer id, CustomerDto newData) {
 
         Customer customer = repository.findById(id)
@@ -70,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
         return repository.save(customer);
     }
 
-
+    @Override
     public void deleteCustomer(Integer id) {
         Customer customer = repository.findById(id)
                 .orElseThrow(() -> new CustomerNotFindException("Customer not found"));
@@ -78,16 +76,11 @@ public class CustomerServiceImpl implements CustomerService {
         repository.save(customer);
     }
 
-
+    @Override
     public List<Customer> getDeletedCustomers() {
-        List<Customer> customerList = repository.getCustomerByDeleted(true);
-        if (customerList.isEmpty()) {
-            throw new CustomerNotFindException("Customer not found");
-        } else {
-            return customerList;
-        }
+        return repository.findCustomerByDeleted(true);
     }
-
+    @Override
     public List<Customer> getCustomerByName(String name){
         return repository.findByName(name);
     }

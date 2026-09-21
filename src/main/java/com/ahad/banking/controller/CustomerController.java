@@ -7,6 +7,8 @@ import com.ahad.banking.dto.RealCustomerDto;
 import com.ahad.banking.facade.CustomerFacade;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,9 @@ public class CustomerController {
 
 
     @PostMapping("/add")
-    public void addCustomer(@Valid @RequestBody CustomerDto customer) {
+    public ResponseEntity<Void> addCustomer(@Valid @RequestBody CustomerDto customer) {
             customerFacade.addCustomer(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
 
     }
@@ -44,8 +47,9 @@ public class CustomerController {
     }
 
     @DeleteMapping("/deleted/{id}")
-    public void deleteCustomer(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
         customerFacade.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/all/deleted")
