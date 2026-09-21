@@ -86,6 +86,8 @@ public interface CustomerMapper {
     }
 
 
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "version", ignore = true)
     @Mapping(target = "id", ignore = true)
     RealCustomer mapToRealCustomer(
             RealCustomerDto realCustomerDto,

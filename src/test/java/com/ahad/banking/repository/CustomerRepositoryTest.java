@@ -61,8 +61,8 @@ class CustomerRepositoryTest {
         repository.save(c1);
         repository.save(c2);
 
-        List<Customer> active = repository.getCustomerByDeleted(false);
-        List<Customer> deleted = repository.getCustomerByDeleted(true);
+        List<Customer> active = repository.findCustomerByDeleted(false);
+        List<Customer> deleted = repository.findCustomerByDeleted(true);
 
         assertEquals(1, active.size());
         assertEquals(1, deleted.size());
